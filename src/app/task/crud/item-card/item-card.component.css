@@ -1,0 +1,61 @@
+.task-card{
+  height: 300px;
+}
+
+.task-process{
+  font-size: 0.95rem;
+  border-radius: 16px;
+  padding: 0.25rem;
+  width: auto;
+  float: right;
+}
+
+.task-process.white{
+  background: rgb(93, 93, 93);
+  color: white;
+}
+
+.task-process.orange{
+  background: rgb(255, 176, 59);
+  color: white;
+}
+
+.task-process.blue{
+  background: rgb(81, 68, 255);
+  color: white;
+}
+
+.task-process.green{
+  background: rgb(95, 255, 108);
+  color: white;
+}
+
+.task-name{
+  border-radius: 16px;
+  background: rgb(175, 175, 175);
+  padding: 0.25rem;
+  font-size: 1.25rem;
+}
+
+.task-assigned{
+  border-radius: 16px;
+  background: rgb(175, 175, 175);
+  padding: 0.25rem;
+}
+
+.task-assigned-user{
+  border-radius: 16px;
+  background: rgb(93, 93, 93);
+  color: white;
+  font-size: 0.95rem;
+  padding: 0.25rem;
+}
+
+.task-difficulty{
+  color: yellow;
+}
+
+.material-symbols-outlined{
+  background-color: rgb(175, 175, 175);
+  border-radius: 50%;
+}

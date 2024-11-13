@@ -1,0 +1,22 @@
+<!-- navbar -->
+<mat-toolbar color="primary">
+  <div class="col-lg-1 col-md-12">
+    <h1>
+      <a class="text-dark link-offset-2 link-underline link-underline-opacity-0" routerLink="/">
+        APPTASKS
+      </a>
+
+    </h1>
+  </div>
+  <div class="col-lg-9 col-md-12" >
+    <a class="text-dark link-offset-2 link-underline link-underline-opacity-0" routerLink="/board">
+      Tablero
+    </a>
+  </div>
+
+</mat-toolbar>
+
+<!-- componentes basados en la ruta -->
+<div class="container mt-4 border rounded">
+  <router-outlet></router-outlet>
+</div>

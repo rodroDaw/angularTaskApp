@@ -1,0 +1,15 @@
+<div *ngIf="tasksList.length > 0; else tasksListEmpty" class="row my-4">
+
+  <app-item-card *ngFor="let task of tasksList"
+      [task]="task"
+      class="card-item bg-light border rounded shadow">
+  </app-item-card>
+
+</div>
+
+<!-- Mostrar mensaje si no hay tareas -->
+<ng-template  #tasksListEmpty>
+  <div class="row my-4">
+    <p>No hay tareas disponibles.</p>
+  </div>
+</ng-template>

@@ -1,0 +1,46 @@
+{
+  "tasks": [
+    {
+      "id": "1",
+      "name": "Revisar componente header",
+      "assigned": "",
+      "difficulty": 1,
+      "process": "pending selection"
+    },
+    {
+      "id": "2",
+      "name": "Revisar componente navbar",
+      "assigned": "Pedro",
+      "difficulty": 2,
+      "process": "pending selection"
+    },
+    {
+      "id": "3",
+      "name": "Revisar componente searcher",
+      "assigned": "",
+      "difficulty": 3,
+      "process": "pending selection"
+    },
+    {
+      "id": "4",
+      "name": "Revisar componente footer",
+      "assigned": "",
+      "difficulty": 4,
+      "process": "done"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "name": "Rodrigo"
+    },
+    {
+      "id": "2",
+      "name": "Juan"
+    },
+    {
+      "id": "3",
+      "name": "Pedro"
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+<div cdkDropListGroup class="task-board">
+
+  <div class="column" data-process="pending selection">
+    <h2>pending selection</h2>
+
+    <div
+      cdkDropList
+      [cdkDropListData]="tasksByStatus['pending selection']"
+      (cdkDropListDropped)="drop($event)"
+      class="example-list"
+      >
+      @for (item of tasksByStatus['pending selection']; track item) {
+        <div class="example-box" cdkDrag>
+          <span class="data-id-task d-none">{{item.id}}</span>
+          {{item.id}}-{{item.name}}, {{item.process}}
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="column" data-process="in progress">
+    <h2>in progress</h2>
+
+    <div
+      cdkDropList
+      [cdkDropListData]="tasksByStatus['in progress']"
+      (cdkDropListDropped)="drop($event)"
+      class="example-list"
+      >
+      @for (item of tasksByStatus['in progress']; track item) {
+        <div class="example-box" cdkDrag>
+          <span class="data-id-task d-none">{{item.id}}</span>
+          {{item.id}}-{{item.name}}, {{item.process}}
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="column" data-process="pending validation">
+    <h2>pending validation</h2>
+
+    <div
+      cdkDropList
+      [cdkDropListData]="tasksByStatus['pending validation']"
+      (cdkDropListDropped)="drop($event)"
+      class="example-list"
+      >
+      @for (item of tasksByStatus['pending validation']; track item) {
+        <div class="example-box" cdkDrag>
+          <span class="data-id-task d-none">{{item.id}}</span>
+          {{item.id}}-{{item.name}}, {{item.process}}
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="column" data-process="done">
+    <h2>done</h2>
+
+    <div
+      cdkDropList
+      [cdkDropListData]="tasksByStatus['done']"
+      (cdkDropListDropped)="drop($event)"
+      class="example-list"
+      >
+      @for (item of tasksByStatus['done']; track item) {
+        <div class="example-box" cdkDrag>
+          <span class="data-id-task d-none">{{item.id}}</span>
+          {{item.id}}-{{item.name}}, {{item.process}}
+        </div>
+      }
+    </div>
+  </div>
+
+</div>

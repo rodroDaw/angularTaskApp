@@ -1,0 +1,41 @@
+<div class="task-card">
+  <div class="col-12 task-name">
+    <div class="row">
+      <div class="col-12">
+        <div class="task-process text-uppercase"
+        [ngClass]="{
+          'white': task?.process === 'pending selection',
+          'orange': task?.process === 'in progress',
+          'blue': task?.process === 'pending validation',
+          'green': task?.process === 'done'
+        }">
+        {{ task?.process }}
+      </div>
+      </div>
+    </div>
+
+    <p class="my-2">
+      {{ task?.id }} - {{ task?.name }}
+    </p>
+  </div>
+  <div *ngIf="btnSelectUserList==true" (click)="showUserList()" class="col-12 btn">
+    <p *ngIf="task?.assigned" class="my-2 task-assigned">Asignado a: <span class="task-assigned-user">{{ task?.assigned }}</span></p>
+    <p *ngIf="!(task?.assigned)" class="my-2 task-assigned">Sin asignar</p>
+  </div>
+  <div *ngIf="divSelectUserList==true" class="col-12 btn">
+    <select (change)="onUserSelect($event)" class="form-select" >
+      <option>Seleccione un usuario:</option>
+      <option value="empty">Sin asignar</option>
+      <option *ngFor="let user of userList" [value]="user.id">
+        {{user.name}}
+      </option>
+    </select>
+  </div>
+  <div class="col-12 my-2 task-difficulty">
+    <span *ngFor="let _ of [].constructor(task?.difficulty)">
+      <span class="material-symbols-outlined">
+        electric_bolt
+      </span>
+    </span>
+  </div>
+</div>
