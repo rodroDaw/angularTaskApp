@@ -1,4 +1,4 @@
-<div class="task-card">
+<div class="task-card position-relative">
   <div class="col-12 task-name">
     <div class="row">
       <div class="col-12">
@@ -14,11 +14,11 @@
       </div>
     </div>
 
-    <p class="my-2">
+    <p class="p-2 my-2">
       {{ task?.id }} - {{ task?.name }}
     </p>
   </div>
-  <div *ngIf="btnSelectUserList==true" (click)="showUserList()" class="col-12 btn">
+  <div *ngIf="btnSelectUserList==true" (click)="showUserList()" class="col-12 p-2  btn">
     <p *ngIf="task?.assigned" class="my-2 task-assigned">Asignado a: <span class="task-assigned-user">{{ task?.assigned }}</span></p>
     <p *ngIf="!(task?.assigned)" class="my-2 task-assigned">Sin asignar</p>
   </div>
@@ -31,11 +31,19 @@
       </option>
     </select>
   </div>
-  <div class="col-12 my-2 task-difficulty">
+  <div class="col-12 p-2 task-difficulty">
     <span *ngFor="let _ of [].constructor(task?.difficulty)">
       <span class="material-symbols-outlined">
         electric_bolt
       </span>
     </span>
+  </div>
+  <div class="w-100 position-absolute bottom-0 row justify-content-end">
+    <div class="col-auto p-0">
+      <app-button-edit [task]="task"></app-button-edit>
+    </div>
+    <div class="col-auto p-0">
+      <app-button-remove [task]="task"></app-button-remove>
+    </div>
   </div>
 </div>

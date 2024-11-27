@@ -1,7 +1,7 @@
-<div cdkDropListGroup class="task-board">
+<div cdkDropListGroup class="row">
 
-  <div class="column" data-process="pending selection">
-    <h2>pending selection</h2>
+  <div class="col-3" data-process="pending selection">
+    <h2 class="text-capitalize">pending selection</h2>
 
     <div
       cdkDropList
@@ -12,14 +12,15 @@
       @for (item of tasksByStatus['pending selection']; track item) {
         <div class="example-box" cdkDrag>
           <span class="data-id-task d-none">{{item.id}}</span>
-          {{item.id}}-{{item.name}}, {{item.process}}
+          <app-item-card [task]="item" class="w-100 card-item bg-light border rounded shadow">
+          </app-item-card>
         </div>
       }
     </div>
   </div>
 
-  <div class="column" data-process="in progress">
-    <h2>in progress</h2>
+  <div class="col-3" data-process="in progress">
+    <h2 class="text-capitalize">in progress</h2>
 
     <div
       cdkDropList
@@ -30,14 +31,15 @@
       @for (item of tasksByStatus['in progress']; track item) {
         <div class="example-box" cdkDrag>
           <span class="data-id-task d-none">{{item.id}}</span>
-          {{item.id}}-{{item.name}}, {{item.process}}
+          <app-item-card [task]="item" class="w-100 card-item bg-light border rounded shadow">
+          </app-item-card>
         </div>
       }
     </div>
   </div>
 
-  <div class="column" data-process="pending validation">
-    <h2>pending validation</h2>
+  <div class="col-3" data-process="pending validation">
+    <h2 class="text-capitalize">pending validation</h2>
 
     <div
       cdkDropList
@@ -48,14 +50,15 @@
       @for (item of tasksByStatus['pending validation']; track item) {
         <div class="example-box" cdkDrag>
           <span class="data-id-task d-none">{{item.id}}</span>
-          {{item.id}}-{{item.name}}, {{item.process}}
+          <app-item-card [task]="item" class="w-100 card-item bg-light border rounded shadow">
+          </app-item-card>
         </div>
       }
     </div>
   </div>
 
-  <div class="column" data-process="done">
-    <h2>done</h2>
+  <div class="col-3" data-process="done">
+    <h2 class="text-capitalize">done</h2>
 
     <div
       cdkDropList
@@ -66,7 +69,8 @@
       @for (item of tasksByStatus['done']; track item) {
         <div class="example-box" cdkDrag>
           <span class="data-id-task d-none">{{item.id}}</span>
-          {{item.id}}-{{item.name}}, {{item.process}}
+          <app-item-card [task]="item" class="w-100 card-item bg-light border rounded shadow">
+          </app-item-card>
         </div>
       }
     </div>

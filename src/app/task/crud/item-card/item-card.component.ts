@@ -5,6 +5,10 @@ import Swal from 'sweetalert2';
 import { Task } from '../../models/task.model';
 import { User } from '../../../user/models/user.model';
 
+import { ButtonEditComponent } from './button-edit/button-edit.component';
+import { ButtonRemoveComponent } from './button-remove/button-remove.component';
+
+
 import { TaskService } from '../../service/task.service';
 import { UserService } from '../../../user/service/user.service';
 
@@ -15,6 +19,8 @@ import { UserService } from '../../../user/service/user.service';
   standalone: true,
   imports: [
     CommonModule,
+    ButtonEditComponent,
+    ButtonRemoveComponent
   ]
 })
 export class ItemCardComponent {

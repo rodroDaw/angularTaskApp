@@ -1,5 +1,6 @@
 .task-card{
-  height: 300px;
+  height: 275px;
+  width: 100%;
 }
 
 .task-process{
@@ -31,7 +32,7 @@
 }
 
 .task-name{
-  border-radius: 16px;
+  border-radius: 0px 0px 16px 16px;
   background: rgb(175, 175, 175);
   padding: 0.25rem;
   font-size: 1.25rem;

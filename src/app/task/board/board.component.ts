@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { ItemCardComponent } from '../crud/item-card/item-card.component';
+
+declare var $: any;
+
 import {
   DragDropModule,
   CdkDragDrop,
@@ -23,7 +27,8 @@ import { parse } from 'path';
   imports: [
     CommonModule,
     DragDropModule,
-    CdkDropListGroup, CdkDropList, CdkDrag
+    CdkDropListGroup, CdkDropList, CdkDrag,
+    ItemCardComponent
   ]
 })
 export class BoardComponent {
@@ -68,50 +73,22 @@ export class BoardComponent {
   constructor(private taskService: TaskService) { }
 
   drop(event: CdkDragDrop<any>) {
-    console.log('drop!!!!!!!!!');
-
-    /*
-    console.log('event');
-    console.log(event);
-
-    console.log('idTask');
-    console.log(event.item.element.nativeElement.firstChild?.textContent);
-    */
-    //idTask console.log(event.item.element.nativeElement.firstChild?.textContent);
     const taskIdString = event.item.element.nativeElement.firstChild?.textContent;
     const idTaskMoved = taskIdString ? Number(taskIdString) : NaN;
 
-    //process de columna nueva
-    console.log('process');
-    //console.log($('.data-id-task'));
-    let findDomElementIdTask = document.querySelectorAll('.data-id-task');
-   // Filtrar el elemento cuyo texto sea igual a 'taskIdString'
-    let elementIdTask = Array.from(findDomElementIdTask).find(el => el.textContent && el.textContent.trim() === taskIdString);
-    if(elementIdTask){
-      console.log(elementIdTask.parentElement)
-      let padreColumn = elementIdTask.closest('.column');
-      console.log(padreColumn);
-    }
+    setTimeout(() => {
+      let elementIdTask = $('.data-id-task:contains("'+taskIdString+'")');
+      let newProccess = $(elementIdTask).parent().parent().parent().attr('data-process');
 
-
-    if (event.previousContainer === event.container) {
-      //Movemos la TASK sobre la misma columna
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      //Movemos la TASK sobre otra columna (CAMBIAMOS EL process)
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );
+      console.log(newProccess);
 
       this.taskService.getTaskById(idTaskMoved).subscribe({
         next: (selectedTask) => {
           if (selectedTask) {
+            selectedTask.process = newProccess;
+
             this.taskService.updateTask2(selectedTask).subscribe({
               next: (updatedTask) => {
-                updatedTask.process = "done";
                 console.log('Tarea actualizada correctamente:', updatedTask);
               },
               error: (error) => {
@@ -128,48 +105,25 @@ export class BoardComponent {
         }
       });
 
-      /*
-      const taskMoved = this.taskService.getTaskById(Number(idTaskMoved));
-      console.log('taskMoved!');
-      console.log(taskMoved);
-      */
-    }
-  }
+    }, 500);
 
-  /*
-  drop(event: CdkDragDrop<Task[]>, newProcess: Task['process']) {
-    if (event.previousContainer !== event.container) {
-      const task = event.previousContainer.data[event.previousIndex];
-      this.taskService.updateTaskProcess(task.id, newProcess);
-    }
-  }
-
-  drop(event: CdkDragDrop<Task[]>, newProcess: Task['process']) {
-    console.log('Dropped!', event);
-
-    if (event.previousContainer !== event.container) {
-      const task = event.previousContainer.data[event.previousIndex];
-      this.taskService.updateTaskProcess(task.id, newProcess);
-
+    if (event.previousContainer === event.container) {
+      //Movemos la TASK sobre la misma columna
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      //Movemos la TASK sobre otra columna (CAMBIAMOS EL process)
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
-        event.currentIndex
+        event.currentIndex,
       );
+
+
+
+
     }
-    this.hoveredStatus = null; // Resetea el estado visual después de soltar el elemento
   }
 
-  onDragEnter(status: Task['process']) {
-    console.log('Entrando en column:', status); // Verifica en consola
-    this.hoveredStatus = status;
-  }
-
-  onDragExit() {
-    console.log('Saliendo de column'); // Verifica en consola
-    this.hoveredStatus = null;
-  }
-    */
 
 }

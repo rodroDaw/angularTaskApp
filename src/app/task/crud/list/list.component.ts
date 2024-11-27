@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { Task } from '../../models/task.model';
 import { ItemCardComponent } from '../item-card/item-card.component';
+import { ItemCardAddComponent } from '../item-card-add/item-card-add.component';
 
 @Component({
   selector: 'app-list',
@@ -11,7 +12,8 @@ import { ItemCardComponent } from '../item-card/item-card.component';
   standalone: true,
   imports: [
     CommonModule,
-    ItemCardComponent
+    ItemCardComponent,
+    ItemCardAddComponent
 
   ]
 })

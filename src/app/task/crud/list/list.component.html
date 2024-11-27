@@ -1,8 +1,10 @@
 <div *ngIf="tasksList.length > 0; else tasksListEmpty" class="row my-4">
 
+  <app-item-card-add class="card-item bg-light border rounded shadow"></app-item-card-add>
+
   <app-item-card *ngFor="let task of tasksList"
       [task]="task"
-      class="card-item bg-light border rounded shadow">
+      class="card-item p-0 bg-light border rounded shadow">
   </app-item-card>
 
 </div>
