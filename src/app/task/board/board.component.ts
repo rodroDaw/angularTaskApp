@@ -74,7 +74,6 @@ export class BoardComponent {
 
   drop(event: CdkDragDrop<any>) {
     const taskIdString = event.item.element.nativeElement.firstChild?.textContent;
-    const idTaskMoved = taskIdString ? Number(taskIdString) : NaN;
 
     setTimeout(() => {
       let elementIdTask = $('.data-id-task:contains("'+taskIdString+'")');
@@ -82,29 +81,30 @@ export class BoardComponent {
 
       console.log(newProccess);
 
-      this.taskService.getTaskById(idTaskMoved).subscribe({
-        next: (selectedTask) => {
-          if (selectedTask) {
-            selectedTask.process = newProccess;
+      if(taskIdString){
+        this.taskService.getTaskById(taskIdString).subscribe({
+          next: (selectedTask) => {
+            if (selectedTask) {
+              selectedTask.process = newProccess;
 
-            this.taskService.updateTask2(selectedTask).subscribe({
-              next: (updatedTask) => {
-                console.log('Tarea actualizada correctamente:', updatedTask);
-              },
-              error: (error) => {
-                console.error('Error al actualizar la tarea:', error);
-              }
-            });
+              this.taskService.updateTask2(selectedTask).subscribe({
+                next: (updatedTask) => {
+                  console.log('Tarea actualizada correctamente:', updatedTask);
+                },
+                error: (error) => {
+                  console.error('Error al actualizar la tarea:', error);
+                }
+              });
 
-          } else {
-            console.error('Tarea no encontrada');
+            } else {
+              console.error('Tarea no encontrada');
+            }
+          },
+          error: (error) => {
+            console.error('Error al obtener la tarea:', error);
           }
-        },
-        error: (error) => {
-          console.error('Error al obtener la tarea:', error);
-        }
-      });
-
+        });
+      }
     }, 500);
 
     if (event.previousContainer === event.container) {

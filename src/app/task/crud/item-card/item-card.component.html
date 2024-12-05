@@ -40,10 +40,16 @@
   </div>
   <div class="w-100 position-absolute bottom-0 row justify-content-end">
     <div class="col-auto p-0">
-      <app-button-edit [task]="task"></app-button-edit>
+      <app-button-edit
+        [task]="task"
+        (taskUpdate)="refreshTaskList()">
+      </app-button-edit>
     </div>
     <div class="col-auto p-0">
-      <app-button-remove [task]="task"></app-button-remove>
+      <app-button-remove
+        [task]="task"
+        (taskRemove)="refreshTaskList()">
+      </app-button-remove>
     </div>
   </div>
 </div>

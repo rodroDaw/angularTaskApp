@@ -1,17 +1,25 @@
 <div *ngIf="tasksList.length > 0; else tasksListEmpty" class="row my-4">
-
-  <app-item-card-add class="card-item bg-light border rounded shadow"></app-item-card-add>
+  <app-item-card-add (taskAdded)="updateTaskList($event)" class="card-item bg-light border rounded shadow"></app-item-card-add>
 
   <app-item-card *ngFor="let task of tasksList"
       [task]="task"
+      (taskRemove)="updateTaskList($event)"
+      (taskUpdate)="updateTaskList($event)"
+
       class="card-item p-0 bg-light border rounded shadow">
   </app-item-card>
-
 </div>
 
 <!-- Mostrar mensaje si no hay tareas -->
 <ng-template  #tasksListEmpty>
   <div class="row my-4">
-    <p>No hay tareas disponibles.</p>
+    <div class="col-12 text-center">
+      <p>No hay tareas disponibles.</p>
+
+    </div>
+    <app-item-card-add
+      (taskAdded)="updateTaskList($event)"
+      class="card-item bg-light border rounded shadow m-0"></app-item-card-add>
+
   </div>
 </ng-template>

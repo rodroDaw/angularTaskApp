@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms'; // ngModel
 import { CommonModule } from '@angular/common';
 
@@ -22,13 +22,22 @@ import { TaskService } from '../../../service/task.service';
 export class ButtonRemoveComponent {
 
   @Input() task: Task | undefined;
-  currentTask: { id: number; name: string; assigned: string; difficulty: number; process: 'pending selection' | 'in progress' | 'pending validation' | 'done'; } | null | undefined;
+
+  @Output() taskRemove = new EventEmitter<any>();
+
+  currentTask: { id: string; name: string; assigned: string; difficulty: number; process: 'pending selection' | 'in progress' | 'pending validation' | 'done'; } | null | undefined;
 
   showModal = false;
 
   constructor(private taskService: TaskService) {}
 
-  showFormModal(id: number | undefined): void {
+  refreshTaskList() {
+    this.taskService.getTasks().subscribe((data: Task[]) => {
+      this.taskRemove.emit(data);
+    });
+  }
+
+  showFormModal(id: string | undefined): void {
     this.showModal = true;
     this.currentTask = this.task;
   }
@@ -55,6 +64,7 @@ export class ButtonRemoveComponent {
           timerProgressBar: true,
         }).then(() => {
           this.showModal = false;
+          this.refreshTaskList();
         });
 
       }, error => {
@@ -69,31 +79,5 @@ export class ButtonRemoveComponent {
     }
   }
 
-
-  /*
-  removePermanent() {
-    if (this.currentTask != null) {
-      this.taskService.deleteTask(this.currentTask.id).subscribe(() => {
-
-        Swal.fire({
-          title: 'Tarea eliminada',
-          text: `La tarea "${this.currentTask?.name}" ha sido eliminada exitosamente.`,
-          icon: 'error',
-          confirmButtonText: 'Aceptar',
-          customClass: {
-            popup: 'alert alert-danger',
-            confirmButton: 'btn btn-primary'
-          },
-          timer: 2000,
-          timerProgressBar: true,
-        }).then(() => {
-          this.showModal = false;
-        });
-
-      });
-
-    }
-  }
-    */
 
 }

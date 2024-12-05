@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
 
@@ -27,6 +27,12 @@ export class ItemCardComponent {
 
   @Input() task: Task | undefined;
 
+  @Input() tasksList: Task[] = [];
+
+  @Output() taskUpdate = new EventEmitter<any>();
+
+  @Output() taskRemove = new EventEmitter<any>();
+
   userList: User[] = [];
 
   //div para select de asignar usuario a tarea
@@ -38,6 +44,13 @@ export class ItemCardComponent {
   constructor(
     private taskService: TaskService,
     private userService: UserService) { }
+
+  refreshTaskList() {
+    this.taskService.getTasks().subscribe((data: Task[]) => {
+      this.taskRemove.emit(data);
+      this.taskUpdate.emit(data);
+    });
+  }
 
   showUserList(): void {
     console.log('showUserList()');
@@ -55,7 +68,7 @@ export class ItemCardComponent {
   }
 
   onUserSelect(event: Event): void {
-    if((event.target as HTMLSelectElement).value=="empty"){
+    if ((event.target as HTMLSelectElement).value == "empty") {
       if (this.task != undefined) {
         this.task.assigned = "";
         this.taskService.updateTask2(this.task).subscribe({
@@ -72,7 +85,7 @@ export class ItemCardComponent {
       this.divSelectUserList = false;
       this.btnSelectUserList = true;
 
-    }else{
+    } else {
       const selectedUserId = (event.target as HTMLSelectElement).value;
 
       if (this.task && selectedUserId) {
@@ -108,5 +121,6 @@ export class ItemCardComponent {
     }
 
   }
+
 
 }

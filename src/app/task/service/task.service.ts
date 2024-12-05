@@ -22,7 +22,7 @@ export class TaskService {
   }
 
   // Obtener una tarea por id
-  getTaskById(id: number): Observable<any> {
+  getTaskById(id: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/${id}`);
   }
 
@@ -32,7 +32,7 @@ export class TaskService {
   }
 
   // Actualizar una tarea
-  updateTask(id: number, task: any): Observable<any> {
+  updateTask(id: string, task: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/${id}`, task);
   }
 
@@ -41,12 +41,12 @@ export class TaskService {
   }
 
   // Eliminar una tarea
-  deleteTask(id: number): Observable<any> {
+  deleteTask(id: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
 
   // Método para actualizar el estado de una tarea
-  updateTaskProcess(taskId: number, newProcess: Task['process']) {
+  updateTaskProcess(taskId: string, newProcess: Task['process']) {
     const tasks = this.tasksSubject.value.map(task =>
       task.id === taskId ? { ...task, process: newProcess } : task
     );
